@@ -64,10 +64,18 @@ This document outlines the production-level microservices architecture and assig
 You don't need to install MongoDB or Node.js versions locally if you use Docker.
 
 **To Start Everything:**
-```bash
-cd backend
-docker-compose up --build
-```
+1.  **Copy the Example Environments**:
+    ```bash
+    cp backend/user-service/.env.example backend/user-service/.env
+    cp backend/api-gateway/.env.example backend/api-gateway/.env
+    ```
+    *(Note: On Windows, use `copy` instead of `cp`.)*
+2.  **Edit the `.env` files**: Add your specific credentials (like Stripe or Cloudinary keys).
+3.  **Run Docker**:
+    ```bash
+    cd backend
+    docker-compose up --build
+    ```
 
 **Why use Docker for development?**
 - **Isolation**: Siddhesh's computer might have Node 18, and Suvesh's might have Node 20. Docker ensures you both use **Node 20-alpine**.
