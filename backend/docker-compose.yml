@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://mongodb:27017/tg-levels
+      - ACCESS_TOKEN_SECRET=vjndhrvgdjrvhfugjdvkfgj
+      - REFRESH_TOKEN_SECRET=vghdjuhgvfidkhvyfgdhyvgfiju
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - USER_SERVICE_URL=http://user-service:3001
+      - NODE_ENV=development
+    depends_on:
+      - user-service
+
+volumes:
+  mongodb_data:
