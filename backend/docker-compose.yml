@@ -21,6 +21,19 @@ services:
     depends_on:
       - mongodb
 
+  admin-service:
+    build: ./admin-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb://mongodb:27017/tg-levels
+      - ACCESS_TOKEN_SECRET=vjndhrvgdjrvhfugjdvkfgj
+      - REFRESH_TOKEN_SECRET=vghdjuhgvfidkhvyfgdhyvgfiju
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+
   api-gateway:
     build: ./api-gateway
     ports:
@@ -28,9 +41,11 @@ services:
     environment:
       - PORT=3000
       - USER_SERVICE_URL=http://user-service:3001
+      - ADMIN_SERVICE_URL=http://admin-service:3002
       - NODE_ENV=development
     depends_on:
       - user-service
+      - admin-service
 
 volumes:
   mongodb_data:

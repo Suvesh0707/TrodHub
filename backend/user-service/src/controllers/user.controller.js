@@ -71,7 +71,7 @@ export const userRegister = async (req, res) => {
       fullname,
       email,
       password: hashedPassword,
-      role: "user",
+      role : req.body.role || "user",
     });
 
     return sendAuthResponse(res, user, "User registered successfully", 201);

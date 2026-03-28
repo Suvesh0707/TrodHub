@@ -17,6 +17,9 @@ app.use(express.json());
 // For example, /api/v1/users will be proxied to http://localhost:3001/api/v1/users
 app.use("/api/v1/users", proxy(process.env.USER_SERVICE_URL || "http://localhost:3001"));
 
+// Proxy requests to the admin-service
+app.use("/api/v1/admin", proxy(process.env.ADMIN_SERVICE_URL || "http://localhost:3002"));
+
 app.get("/health", (req, res) => {
   res.json({ status: "API Gateway is running" });
 });
