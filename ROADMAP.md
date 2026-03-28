@@ -97,3 +97,23 @@ When Siddhesh wants to add the `product-service`:
 - [ ] **Database Per Service**: Ensure `product-service` doesn't read `user-service` database directly.
 - [ ] **Health Checks**: Implement `/health` endpoints for monitoring.
 - [ ] **Logging**: Centralized logs for debugging cross-service issues.
+
+
+## End project file strcuture 
+student-marketplace/
+│
+├── api-gateway/
+├── auth-service/
+├── user-service/
+├── product-service/
+├── order-service/
+├── delivery-service/
+├── payment-service/
+├── notification-service/
+├── chat-service/
+├── review-service/
+├── admin-service/
+│
+├── shared/
+├── docker-compose.yml
+├── README.md
